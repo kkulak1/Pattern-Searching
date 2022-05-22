@@ -1,7 +1,6 @@
 import time_data
 import argparse
 import sys
-import matplotlib.pyplot as plt
 
 
 def open_file(path):
@@ -163,6 +162,9 @@ def main(args):
     txt3 = "ABCD"
     pat3 = "AABCDADABB"
 
+    txt4 = "ABBAABABAAB"
+    pat4 = "DD"
+
     print("-------------NAIVE-----------------")
 
     print(naive(txt, pat))
@@ -172,6 +174,8 @@ def main(args):
     print(naive(txt2, pat2))
 
     print(naive(txt3, pat3))
+
+    print(naive(txt4, pat4))
 
     print("-------------KMP-----------------")
 
@@ -185,6 +189,8 @@ def main(args):
 
     print(KMP(txt3, pat3))
 
+    print(KMP(txt4, pat4))
+
     print("-------------KR-----------------")
 
     print(KR(txt, pat, 13))
@@ -195,13 +201,36 @@ def main(args):
 
     print(KR(txt3, pat3, 13))
 
+    print(KR(txt4, pat4, 13))
+
+    txt5, pat5 = time_data.random_text_and_pattern()
+    txt6, pat6 = time_data.random_text_and_pattern()
+    txt7, pat7 = time_data.random_text_and_pattern()
+
+    print("-------------KMP-KR-Random-----------------")
+
+    print(txt5)
+    print(pat5)
+    print("KMP: ", KMP(txt5, pat5))
+    # print("KR: ", KR(txt5, pat5, 13), "\n")
+
+    print(txt6)
+    print(pat6)
+    print("KMP: ", KMP(txt6, pat6))
+    # print("KR: ", KR(txt6, pat6, 13), "\n")
+
+    print(txt7)
+    print(pat7)
+    print("KMP: ", KMP(txt7, pat7))
+    # print("KR: ", KR(txt7, pat7, 13), "\n")
+
     print("----------------------------------------")
 
-    # words = [i for i in ]
+    n = time_data.get_naive_time(words)
+    kmp = time_data.get_KMP_time(words)
+    # kr = time_data.get_KR_time(words)
 
-    print(time_data.get_naive_time(words))
-    print(time_data.get_KMP_time(words))
-    print(time_data.get_KR_time(words))
+    time_data.plot_find_time(n, kmp)
 
 
 if __name__ == "__main__":
