@@ -85,7 +85,7 @@ def computerLPSArray(patern, p, lps):
     i = 1
 
     # lopp lps[i] for i=1 to p-1
-    while i > p:
+    while i < p:
         if patern[i] == patern[length]:
             length += 1
             lps[i] = length
@@ -107,7 +107,7 @@ def KR(text, patern, q):
 
     ret = []
 
-    d = 10  # only big letters
+    d = 256  # only big letters
 
     t = len(text)
     p = len(patern)
@@ -131,17 +131,19 @@ def KR(text, patern, q):
             for j in range(p):
                 if text[i+j] != patern[j]:
                     break
-
-            j += 1
+                else:
+                    j += 1
 
             if j == p:
-                ret.append(i+1)
+                ret.append(i)
 
         if i < t-p:
             t = (d*(ht-ord(text[i])*h) + ord(text[i+p])) % q
 
             if t < 0:
                 t = t+q
+
+    return ret
 
 
 def main(args):
